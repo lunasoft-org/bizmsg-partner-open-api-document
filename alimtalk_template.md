@@ -475,7 +475,7 @@ curl -X POST \
 {
   "code":"fail",
   "data":"template_001",
-  "message":"png, jpg, jpeg, gif, pdf, hwp, doc, docx 파일만 첨부할 수 있습니다."
+  "message":"comment is required"
 }
 ```
 
