@@ -581,7 +581,7 @@ curl -X POST \
 ```
 curl -X GET \
   -H 'userId: {user_id}' \
-  'https://bizmsg-open-api.blumn.ai/v2/template/last_modified?since=2025-01-01 00:00:00&page=1'
+  'https://bizmsg-open-api.blumn.ai/v2/template/last_modified?since=20260101120000&page=1'
 ```
 
 ### Example Success Response
