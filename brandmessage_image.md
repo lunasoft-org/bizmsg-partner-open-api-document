@@ -17,15 +17,12 @@
 - METHOD: POST
 - URL: /v1/direct/image/default
 
-### Request Header
-- Content-Type: multipart/form-data
-
 ### Request Body
 
 | 키 | 데이터 타입 | 필수 | 설명 |
 |----|------------|------|------|
-| image | file | Y | 이미지 파일 (jpg, jpeg, png / 최대 500KB) |
-| imageNickname | string | Y | 이미지 식별용 닉네임 |
+| image | file | Y | 이미지 파일 1개 (jpg, jpeg, png / 최대 500KB) |
+| imageNickname | string | N | 이미지 닉네임 |
 
 ### Example CURL
 
@@ -33,7 +30,6 @@
 curl -X POST \
   -H "userId: {user_id}" \
   -F "image=@sample.png" \
-  -F "imageNickname=sample" \
   https://bizmsg-open-api.blumn.ai/v1/direct/image/default
 ```
 
@@ -44,7 +40,7 @@ curl -X POST \
   "code": "success",
   "data": {
     "imageName": "sample.png",
-    "imageNickname": "sample",
+    "imageNickname": "",
     "imageUrl": "https://..."
   },
   "message": ""
@@ -69,15 +65,12 @@ curl -X POST \
 - METHOD: POST
 - URL: /v1/direct/image/wide
 
-### Request Header
-- Content-Type: multipart/form-data
-
 ### Request Body
 
 | 키 | 데이터 타입 | 필수 | 설명 |
 |----|------------|------|------|
-| image | file | Y | 와이드 이미지 파일 |
-| imageNickname | string | Y | 이미지 식별용 닉네임 |
+| image | file | Y | 와이드 이미지 1개 |
+| imageNickname | string | N | 이미지 닉네임 |
 
 ### Example CURL
 
@@ -85,7 +78,6 @@ curl -X POST \
 curl -X POST \
   -H "userId: {user_id}" \
   -F "image=@wide.png" \
-  -F "imageNickname=wide" \
   https://bizmsg-open-api.blumn.ai/v1/direct/image/wide
 ```
 
@@ -96,20 +88,10 @@ curl -X POST \
   "code": "success",
   "data": {
     "imageName": "wide.png",
-    "imageNickname": "wide",
+    "imageNickname": "",
     "imageUrl": "https://..."
   },
   "message": ""
-}
-```
-
-### Example Fail Response
-
-```json
-{
-  "code": "fail",
-  "data": "",
-  "message": "image is required"
 }
 ```
 
@@ -121,23 +103,19 @@ curl -X POST \
 - METHOD: POST
 - URL: /v1/direct/image/wideItemList/first
 
-### Request Header
-- Content-Type: multipart/form-data
-
 ### Request Body
 
 | 키 | 데이터 타입 | 필수 | 설명 |
 |----|------------|------|------|
-| image | file | Y | 와이드 리스트 대표 이미지 |
-| imageNickname | string | Y | 이미지 식별용 닉네임 |
+| image | file | Y | 대표 이미지 1개 |
+| imageNickname | string | N | 이미지 닉네임 |
 
 ### Example CURL
 
 ```bash
 curl -X POST \
   -H "userId: {user_id}" \
-  -F "image=@item1.png" \
-  -F "imageNickname=item1" \
+  -F "image=@first.png" \
   https://bizmsg-open-api.blumn.ai/v1/direct/image/wideItemList/first
 ```
 
@@ -147,21 +125,11 @@ curl -X POST \
 {
   "code": "success",
   "data": {
-    "imageName": "item1.png",
-    "imageNickname": "item1",
+    "imageName": "first.png",
+    "imageNickname": "",
     "imageUrl": "https://..."
   },
   "message": ""
-}
-```
-
-### Example Fail Response
-
-```json
-{
-  "code": "fail",
-  "data": "",
-  "message": "image is required"
 }
 ```
 
@@ -173,32 +141,28 @@ curl -X POST \
 - METHOD: POST
 - URL: /v1/direct/image/wideItemList
 
-### Request Header
-- Content-Type: multipart/form-data
-
 ### Request Body
 
 | 키 | 데이터 타입 | 필수 | 설명 |
 |----|------------|------|------|
-| image_1 | file | Y | 이미지 파일 #1 |
-| imageNickname_1 | string | Y | 이미지 #1 닉네임 |
-| image_2 | file | N | 이미지 파일 #2 |
-| imageNickname_2 | string | N | 이미지 #2 닉네임 |
+| image_1 | file | Y | 이미지 파일 1 |
+| imageNickname_1 | string | N | 이미지 1 닉네임 |
+| image_2 | file | N | 이미지 파일 2 |
+| imageNickname_2 | string | N | 이미지 2 닉네임 |
+| image_3 | file | N | 이미지 파일 3 |
+| imageNickname_3 | string | N | 이미지 3 닉네임 |
 
-### Example CURL
+### Example CURL (2개 요청)
 
 ```bash
 curl -X POST \
   -H "userId: {user_id}" \
   -F "image_1=@item1.png" \
-  -F "imageNickname_1=item1" \
   -F "image_2=@item2.png" \
-  -F "imageNickname_2=1234567890123456789012345678901" \
   https://bizmsg-open-api.blumn.ai/v1/direct/image/wideItemList
 ```
 
-### Example Success Response  
-(image_1 성공, image_2 실패)
+### Example Success Response (부분 성공)
 
 ```json
 {
@@ -208,7 +172,7 @@ curl -X POST \
       {
         "formField": "image_1",
         "imgName": "item1.png",
-        "imageNickname": "item1",
+        "imageNickname": "",
         "imageUrl": "https://..."
       }
     ],
@@ -216,8 +180,8 @@ curl -X POST \
       {
         "formField": "image_2",
         "imgName": "item2.png",
-        "imageNickname": "1234567890123456789012345678901",
-        "message": "imageNickname is invalid.(len = 31)"
+        "imageNickname": "",
+        "message": "invalid image file"
       }
     ]
   },
@@ -243,27 +207,27 @@ curl -X POST \
 - METHOD: POST
 - URL: /v1/direct/image/carouselFeed
 
-### Request Header
-- Content-Type: multipart/form-data
-
 ### Request Body
 
 | 키 | 데이터 타입 | 필수 | 설명 |
 |----|------------|------|------|
-| image_1 | file | Y | 캐러셀 피드 이미지 |
-| imageNickname_1 | string | Y | 이미지 닉네임 |
+| image_1 | file | Y | 캐러셀 이미지 |
+| imageNickname_1 | string | N | 이미지 닉네임 |
+| image_2 | file | N | 캐러셀 이미지 |
+| imageNickname_2 | string | N | 이미지 닉네임 |
+| ... | ... | ... | 최대 image_10 까지 가능 |
 
-### Example CURL
+### Example CURL (2개 요청)
 
 ```bash
 curl -X POST \
   -H "userId: {user_id}" \
-  -F "image_1=@carousel.png" \
-  -F "imageNickname_1=carousel" \
+  -F "image_1=@carousel1.png" \
+  -F "image_2=@carousel2.png" \
   https://bizmsg-open-api.blumn.ai/v1/direct/image/carouselFeed
 ```
 
-### Example Success Response
+### Example Success Response (부분 성공)
 
 ```json
 {
@@ -272,12 +236,19 @@ curl -X POST \
     "success": [
       {
         "formField": "image_1",
-        "imgName": "carousel.png",
-        "imageNickname": "carousel",
+        "imgName": "carousel1.png",
+        "imageNickname": "",
         "imageUrl": "https://..."
       }
     ],
-    "failure": []
+    "failure": [
+      {
+        "formField": "image_2",
+        "imgName": "carousel2.png",
+        "imageNickname": "",
+        "message": "invalid image file"
+      }
+    ]
   },
   "message": ""
 }
@@ -301,31 +272,27 @@ curl -X POST \
 - METHOD: POST
 - URL: /v1/direct/image/carouselCommerce
 
-### Request Header
-- Content-Type: multipart/form-data
-
 ### Request Body
 
 | 키 | 데이터 타입 | 필수 | 설명 |
 |----|------------|------|------|
-| image_1 | file | Y | 커머스 이미지 #1 |
-| imageNickname_1 | string | Y | 이미지 #1 닉네임 |
-| image_2 | file | N | 커머스 이미지 #2 |
-| imageNickname_2 | string | N | 이미지 #2 닉네임 |
+| image_1 | file | Y | 커머스 이미지 |
+| imageNickname_1 | string | N | 이미지 닉네임 |
+| image_2 | file | N | 커머스 이미지 |
+| imageNickname_2 | string | N | 이미지 닉네임 |
+| ... | ... | ... | 최대 image_10 까지 가능 |
 
-### Example CURL
+### Example CURL (2개 요청)
 
 ```bash
 curl -X POST \
   -H "userId: {user_id}" \
   -F "image_1=@commerce1.png" \
-  -F "imageNickname_1=commerce1" \
   -F "image_2=@commerce2.png" \
-  -F "imageNickname_2=commerce2" \
   https://bizmsg-open-api.blumn.ai/v1/direct/image/carouselCommerce
 ```
 
-### Example Success Response
+### Example Success Response (부분 성공)
 
 ```json
 {
@@ -335,11 +302,18 @@ curl -X POST \
       {
         "formField": "image_1",
         "imgName": "commerce1.png",
-        "imageNickname": "commerce1",
+        "imageNickname": "",
         "imageUrl": "https://..."
       }
     ],
-    "failure": []
+    "failure": [
+      {
+        "formField": "image_2",
+        "imgName": "commerce2.png",
+        "imageNickname": "",
+        "message": "invalid image file"
+      }
+    ]
   },
   "message": ""
 }
