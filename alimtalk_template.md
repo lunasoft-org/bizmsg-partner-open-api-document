@@ -115,7 +115,7 @@ curl -X POST \
       }
     ]
   }
-]' \ƒ
+]' \
   https://bizmsg-open-api.blumn.ai/v2/template/create
 ```
 
