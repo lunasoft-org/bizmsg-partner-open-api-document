@@ -42,3 +42,71 @@ curl -X GET \
   "message":"senderKey is required"
 }
 ```
+
+2. 일회용 인증 토큰 요청
+
+OBT 환경 메시지 수신을 위한 일회용 인증 토큰 요청
+
+### Endpoint
+- METHOD: GET
+- URL: /v2/partner/test/user/token
+
+### Example CURL
+```
+curl -X GET \
+  'https://obt-bizmsg-api.blumn.ai/v2/partner/test/user/token?phoneNumber=01000000000'
+```
+
+### Example Success Response
+```
+{
+  "code":"success",
+  "data": {
+    "expiredAt": "2026-02-03 14:04:13"
+  },
+  "message":null
+}
+```
+
+### Example Fail Response
+```
+{
+  "code":" fail",
+  "data": null,
+  "message": "요청을 처리하는 중 문제가 발생했습니다."
+}
+```
+
+3. 일회용 인증 시도
+
+OBT 환경 메시지 수신을 위한 일회용 인증 시도
+
+### Endpoint
+- METHOD: GET
+- URL: /v2/partner/test/user/certify
+
+### Example CURL
+```
+curl -X POST \
+  'https://obt-bizmsg-api.blumn.ai/v2/partner/test/user/certify?phoneNumber=01000000000&token=000000'
+```
+
+### Example Success Response
+```
+{
+  "code":"success",
+  "data": {
+    "expiredAt": "2026-02-04 00:00:00"
+  },
+  "message":null
+}
+```
+
+### Example Fail Response
+```
+{
+  "code":" fail",
+  "data": null,
+  "message": "요청을 처리하는 중 문제가 발생했습니다."
+}
+```
