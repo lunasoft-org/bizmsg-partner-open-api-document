@@ -20,7 +20,7 @@
 
 ### Example CURL
 ```
-curl -X GET \
+curl -X POST \
   -H 'userId: {user_id}' \
   'https://obt-bizmsg-api.blumn.ai/v2/partner/test/template/approve?senderKey=2a1ea83fb57b2c21096f994d1ab3091b0dac3c63&templateCode=template_001
 ```
