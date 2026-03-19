@@ -513,6 +513,38 @@ curl -X POST \
 ]
 ```
 
+## 8. 템플릿 검수 요청 취소
+
+### Endpoint
+- METHOD: POST
+- URL: /v2/template/cancel_approval
+
+### Example CURL
+```
+curl -X POST \
+  -H 'userId: {user_id}' \
+  -H 'Content-type: application/json' \
+  -d '[
+    {
+      "senderKey":"2a1ea83fb57b2c21096f994d1ab3091b0dac3c63",
+      "templateCode":"template_001",
+      "senderKeyType":"S"
+    }
+  ]' \
+  https://bizmsg-open-api.blumn.ai/v2/template/cancel_approval
+```
+
+### Example Success Response
+```
+[
+  {
+    "code":"success",
+    "data":"template_001",
+    "message":null
+  }
+]
+```
+
 ### Example Fail Response
 ```
 [
@@ -526,7 +558,7 @@ curl -X POST \
 
 ---
 
-## 8. 템플릿 삭제
+## 9. 템플릿 삭제
 
 ### Endpoint
 - METHOD: POST
@@ -571,7 +603,7 @@ curl -X POST \
 
 ---
 
-## 9. 최근 수정된 템플릿 조회
+## 10. 최근 수정된 템플릿 조회
 
 ### Endpoint
 - METHOD: GET
