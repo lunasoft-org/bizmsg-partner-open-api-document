@@ -513,7 +513,7 @@ curl -X POST \
 ]
 ```
 
-## 8. 템플릿 검수 요청 취소
+## 8. 템플릿 승인 취소
 
 ### Endpoint
 - METHOD: POST
